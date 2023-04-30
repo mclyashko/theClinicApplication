@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: ${POSTGRES_URL}${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+  jpa:
+    show-sql: true
+    open-in-view: true
+
+management.endpoints.web.exposure.include: *

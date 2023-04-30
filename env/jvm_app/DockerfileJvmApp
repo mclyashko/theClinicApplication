@@ -1,0 +1,14 @@
+FROM gradle:jdk17 as builder
+# Install deps before copying code, use docker cache for external packages
+WORKDIR /app
+COPY settings.gradle.kts /app/
+COPY build.gradle.kts /app/
+RUN gradle compileJava
+# Copy source tree and build everything
+COPY src /app/src
+RUN gradle clean test build
+
+FROM openjdk:20 as backend
+WORKDIR /root
+COPY --from=builder /app/build/libs/theClinicApplication-0.0.1-SNAPSHOT.jar ./app/
+ENTRYPOINT ["java", "-jar", "app/theClinicApplication-0.0.1-SNAPSHOT.jar"]
