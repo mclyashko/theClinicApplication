@@ -25,10 +25,15 @@ services:
       dockerfile: ./env/jvm_app/DockerfileJvmApp
     command: bin/app
     environment:
-      POSTGRES_URL: ${POSTGRES_URL}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_URL: ${POSTGRES_URL}
       POSTGRES_DB: ${POSTGRES_DB}
+      MAIL_HOST: ${MAIL_HOST}
+      MAIL_PORT: ${MAIL_PORT}
+      MAIL_USERNAME: ${MAIL_USERNAME}
+      MAIL_PASSWORD: ${MAIL_PASSWORD}
+      COVID_API_KEY: ${COVID_API_KEY}
     ports:
       - "8080:8080"
     restart: "no"

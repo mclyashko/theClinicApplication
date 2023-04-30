@@ -6,5 +6,23 @@ spring:
   jpa:
     show-sql: true
     open-in-view: true
+  mail:
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        transport:
+          protocol: smtp
+        smtp:
+          auth: true
+          starttls:
+            enabled: true
+            required: true
+          ssl:
+            enable: true
 
-management.endpoints.web.exposure.include: *
+api:
+  covid:
+    key: ${COVID_API_KEY}
