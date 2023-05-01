@@ -11,8 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import ru.mirea.theClinicApplication.entity.appUser.AppUserRole
-import ru.mirea.theClinicApplication.handlers.authentication.CustomAuthenticationSuccessHandler
-import ru.mirea.theClinicApplication.handlers.authorization.CustomAuthenticationFailureHandler
+import ru.mirea.theClinicApplication.handler.authentication.CustomAuthenticationSuccessHandler
+import ru.mirea.theClinicApplication.handler.authorization.CustomAuthenticationFailureHandler
 import ru.mirea.theClinicApplication.services.appUser.UserDetailsServiceImpl
 import java.util.concurrent.TimeUnit
 
