@@ -9,7 +9,7 @@ import org.springframework.context.ApplicationContext
 import org.springframework.stereotype.Component
 import ru.mirea.theClinicApplication.entity.appUser.AppUser
 import ru.mirea.theClinicApplication.entity.procedure.Procedure
-import ru.mirea.theClinicApplication.services.mail.EmailService
+import ru.mirea.theClinicApplication.service.mail.EmailService
 import javax.annotation.PostConstruct
 
 @Component

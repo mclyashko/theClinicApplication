@@ -13,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import ru.mirea.theClinicApplication.entity.appUser.AppUserRole
 import ru.mirea.theClinicApplication.handler.authentication.CustomAuthenticationSuccessHandler
 import ru.mirea.theClinicApplication.handler.authorization.CustomAuthenticationFailureHandler
-import ru.mirea.theClinicApplication.services.appUser.UserDetailsServiceImpl
+import ru.mirea.theClinicApplication.service.appUser.UserDetailsServiceImpl
 import java.util.concurrent.TimeUnit
 
 @Configuration
