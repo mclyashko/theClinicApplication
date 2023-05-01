@@ -1,0 +1,15 @@
+CREATE TABLE PROCEDURE
+(
+    ID          BIGSERIAL        NOT NULL
+        CONSTRAINT PROCEDURE_PKEY
+            PRIMARY KEY,
+    COST        DOUBLE PRECISION NOT NULL,
+    DESCRIPTION VARCHAR(255)     NOT NULL
+);
+
+INSERT INTO PROCEDURE (cost, description)
+VALUES (1000, 'Анализ крови');
+INSERT INTO PROCEDURE (cost, description)
+VALUES (2000, 'ЭКГ');
+INSERT INTO PROCEDURE (cost, description)
+VALUES (3000, 'МРТ');
