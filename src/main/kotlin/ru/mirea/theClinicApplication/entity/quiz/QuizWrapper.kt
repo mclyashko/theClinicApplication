@@ -1,16 +1,8 @@
 package ru.mirea.theClinicApplication.entity.quiz
 
-import lombok.AllArgsConstructor
-import lombok.Getter
-import lombok.Setter
-import lombok.ToString
 import org.springframework.stereotype.Component
 
-@Setter
 @Component
-@Getter
-@AllArgsConstructor
-@ToString
 class QuizWrapper(var questions: List<Question>? = null) {
 
     val quizPoints: Int

@@ -1,15 +1,14 @@
 package ru.mirea.theClinicApplication.entity.quiz
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import lombok.*
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
+import javax.persistence.Transient
 
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 class Question (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,7 +59,7 @@ class Question (
 
     val minQuestionPoints: Int
         get() {
-            return maxOf(
+            return minOf(
                 pointsA!!, pointsB!!, pointsC!!
             )
         }

@@ -1,13 +1,7 @@
 package ru.mirea.theClinicApplication.entity.review
 
-import lombok.*
 import java.time.LocalDateTime
 
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 class ReviewReturningDTO (
     var id: Long? = null,
 

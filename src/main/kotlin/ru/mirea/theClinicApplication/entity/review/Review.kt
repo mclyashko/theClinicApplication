@@ -1,17 +1,11 @@
 package ru.mirea.theClinicApplication.entity.review
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import lombok.*
 import ru.mirea.theClinicApplication.entity.appUser.AppUser
 import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 class Review (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

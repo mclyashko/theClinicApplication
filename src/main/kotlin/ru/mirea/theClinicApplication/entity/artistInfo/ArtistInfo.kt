@@ -1,19 +1,11 @@
 package ru.mirea.theClinicApplication.entity.artistInfo
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import lombok.AllArgsConstructor
-import lombok.Getter
-import lombok.NoArgsConstructor
-import lombok.Setter
 import ru.mirea.theClinicApplication.entity.appUser.AppUser
 import ru.mirea.theClinicApplication.entity.procedure.Procedure
 import javax.persistence.*
 
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 class ArtistInfo (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,6 +1,5 @@
 package ru.mirea.theClinicApplication.aspect.loggingAspect
 
-import lombok.extern.slf4j.Slf4j
 import mu.KotlinLogging
 import org.aspectj.lang.JoinPoint
 import org.aspectj.lang.annotation.Aspect
@@ -12,7 +11,6 @@ import java.util.*
 
 private val logger = KotlinLogging.logger {}
 
-@Slf4j
 @Component
 @Aspect
 class LoggingAspect() {
