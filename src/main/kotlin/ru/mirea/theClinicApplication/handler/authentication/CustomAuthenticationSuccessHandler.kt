@@ -1,9 +1,8 @@
 package ru.mirea.theClinicApplication.handler.authentication
 
 import mu.KotlinLogging
+import org.springframework.http.HttpStatus
 import org.springframework.security.core.Authentication
-import org.springframework.security.web.DefaultRedirectStrategy
-import org.springframework.security.web.RedirectStrategy
 import org.springframework.security.web.WebAttributes
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler
 import org.springframework.stereotype.Component
@@ -16,11 +15,6 @@ private val logger = KotlinLogging.logger {}
 
 @Component
 class CustomAuthenticationSuccessHandler : AuthenticationSuccessHandler {
-    private val redirectStrategy: RedirectStrategy
-
-    init {
-        redirectStrategy = DefaultRedirectStrategy()
-    }
 
     @Throws(IOException::class)
     override fun onAuthenticationSuccess(
@@ -38,15 +32,11 @@ class CustomAuthenticationSuccessHandler : AuthenticationSuccessHandler {
         response: HttpServletResponse,
         authentication: Authentication
     ) {
-        val targetUrl = determineTargetUrl(authentication)
-        if (response.isCommitted) {
-            logger.info(
-                "Response has already been committed. Unable to redirect to " +
-                        targetUrl
-            )
-            return
-        }
-        redirectStrategy.sendRedirect(request, response, targetUrl)
+        response.contentType = "application/json;charset=UTF-8"
+        response.status = HttpStatus.OK.value()
+        response.writer.write("{\"role\": \"${authentication.authorities.first().authority}\"}")
+        response.writer.flush()
+        response.writer.close()
     }
 
     protected fun determineTargetUrl(authentication: Authentication): String? {

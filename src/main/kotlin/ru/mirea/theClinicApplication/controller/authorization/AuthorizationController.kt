@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RestController
 import ru.mirea.theClinicApplication.annotation.mailReg.SendMailReg
 import ru.mirea.theClinicApplication.entity.appUser.AppUser
 import ru.mirea.theClinicApplication.service.appUser.AppUserService
@@ -29,5 +30,15 @@ class AuthorizationController @Autowired constructor(private val appUserService:
     @get:GetMapping("/authentication_failure")
     val authenticationFailurePage: String
         get() = "authentication_failure"
+}
+
+@RestController
+class CurrentUserController(
+    private val appUserService: AppUserService
+) {
+    @GetMapping("/get_current_user")
+    fun getCurrentUser(): AppUser {
+        return appUserService.currentUser
+    }
 }
 

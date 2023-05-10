@@ -10,6 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.CorsConfigurationSource
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 import ru.mirea.theClinicApplication.entity.appUser.AppUserRole
 import ru.mirea.theClinicApplication.handler.authentication.CustomAuthenticationSuccessHandler
 import ru.mirea.theClinicApplication.handler.authorization.CustomAuthenticationFailureHandler
@@ -26,13 +29,21 @@ class SecurityConfiguration @Autowired constructor(
 
     public override fun configure(http: HttpSecurity) {
         http
+            .cors().configurationSource {
+                val cors = CorsConfiguration()
+                cors.allowedOrigins = listOf("http://localhost:3000")
+                cors.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                cors.allowedHeaders = listOf("*")
+                cors.allowCredentials = true
+                cors
+            }
+            .and()
             .csrf().disable()
-            .cors().disable()
             .authorizeRequests()
             .antMatchers(
                 "/login", "/logout", "/registration",
                 "/authentication_failure", "/user_already_exists",
-                "/favicon.ico"
+                "/favicon.ico", "/get_current_user"
             )
             .permitAll() // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             .antMatchers("/home_doctor").hasRole(AppUserRole.DOCTOR.name)
@@ -55,7 +66,7 @@ class SecurityConfiguration @Autowired constructor(
             .authenticated()
             .and()
             .formLogin()
-            .loginPage("/login")
+//            .loginPage("/login")
             .loginProcessingUrl("/login")
             .failureHandler(customAuthenticationFailureHandler)
             .successHandler(customAuthenticationSuccessHandler)
@@ -71,6 +82,29 @@ class SecurityConfiguration @Autowired constructor(
             .and()
             .userDetailsService(userDetailsService)
             .sessionManagement()
+//            .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+//            .sessionFixation().migrateSession()
+//            .and()
+//            .headers()
+//            .addHeaderWriter(StaticHeadersWriter("Access-Control-Allow-Origin", "http://localhost:3000"))
+//            .addHeaderWriter(StaticHeadersWriter("Access-Control-Allow-Credentials", "true"))
+    }
+
+//    @Bean
+//    fun corsConfigurationSource(): CorsConfigurationSource? {
+//        val source = UrlBasedCorsConfigurationSource()
+//        val configuration = CorsConfiguration()
+//        configuration.addAllowedMethod("*")
+//        configuration.addAllowedHeader("*")
+//        source.registerCorsConfiguration("/**", configuration)
+//        return source
+//    }
+
+    @Bean
+    fun corsConfigurationSource(): CorsConfigurationSource {
+        val source = UrlBasedCorsConfigurationSource()
+        source.registerCorsConfiguration("/**", CorsConfiguration().applyPermitDefaultValues())
+        return source
     }
 
     @Bean
