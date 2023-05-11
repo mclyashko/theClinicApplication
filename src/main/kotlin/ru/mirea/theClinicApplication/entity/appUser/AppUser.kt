@@ -1,6 +1,7 @@
 package ru.mirea.theClinicApplication.entity.appUser
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.format.annotation.DateTimeFormat
 import ru.mirea.theClinicApplication.entity.artistInfo.ArtistInfo
 import ru.mirea.theClinicApplication.entity.record.Record
@@ -47,7 +48,7 @@ class AppUser (
     var appUserRole: AppUserRole? = null,
 
     @Column(nullable = false)
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     var password: String? = null,
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")

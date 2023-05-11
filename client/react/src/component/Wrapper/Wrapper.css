@@ -1,0 +1,13 @@
+.wrapper {
+    --x: 50%;
+    --y: 50%;
+    position: relative;
+    appearance: none;
+    color: white;
+    outline: none;
+    border-radius: 100px;
+    border: 15px solid transparent;
+    background: linear-gradient(#000, #007) padding-box, radial-gradient(#00C9A7, #845EC2) border-box;
+
+    padding: 15vmax;
+}
