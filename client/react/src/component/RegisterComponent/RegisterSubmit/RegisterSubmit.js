@@ -1,7 +1,8 @@
 import React from 'react';
 import './RegisterSubmit.css'
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import signUpRequest from "../../../util/request/auth/signUpRequest";
+import {loginAction} from "../../../reducer/LoginPageReducer/LoginPageReducer";
 
 function RegisterSubmit(props) {
     const name = useSelector(state => state.userInf.name)
@@ -12,6 +13,7 @@ function RegisterSubmit(props) {
     const phoneNumber = useSelector(state => state.userInf.telephone)
     const email = useSelector(state => state.userInf.login)
     const password = useSelector(state => state.userInf.password)
+    const dispatch = useDispatch()
 
     return (
         <div className="form-group pd2">
@@ -27,7 +29,9 @@ function RegisterSubmit(props) {
                     password: password
                 }
 
-                await signUpRequest(JSON.stringify(userData))
+                if ((await signUpRequest(JSON.stringify(userData))).ok) {
+                    dispatch(loginAction())
+                }
             }} type="submit" className="btn btn-secondary btn-block" style={{ width: '100%' }}>
                 Регистрация
             </button>

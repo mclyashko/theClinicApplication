@@ -22,10 +22,10 @@ const LoginSubmit = () => {
         <div className="form-group pd2">
             <button type="submit" className="btn btn-secondary btn-block" style={{ width: '100%' }}
                 onClick={ async () => {
-                    const signInData = signInRequest(login, password)
-                    await signInData
-                    const currentUser = currentUserRequest()
+                    const signInData = await signInRequest(login, password)
+                    const currentUser = await currentUserRequest()
                     await currentUser
+                    console.log(signInData.role)
                     dispatch(updateRoleAction(signInData.role))
                     dispatch(updateNameAction(currentUser.name))
                     dispatch(updateSurnameAction(currentUser.surname))
@@ -33,6 +33,7 @@ const LoginSubmit = () => {
                     dispatch(updateGenderAction(currentUser.gender))
                     dispatch(updateDateOfBirthAction(currentUser.dateOfBirth))
                     dispatch(updateTelephoneAction(currentUser.phoneNumber))
+                    console.log("done")
                 }}
             >
                 Вход
