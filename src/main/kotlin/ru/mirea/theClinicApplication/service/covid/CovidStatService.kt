@@ -16,7 +16,7 @@ class CovidStatService {
     @Value("\${api.covid.key}")
     private val apiCovidKey: String? = null
 
-    val ruStatistics: CovidStat?
+    val ruStatistics: CovidStat
         get() {
             val restTemplate = RestTemplate()
             val uri = "https://covid-193.p.rapidapi.com/statistics?country=Russia"
@@ -27,7 +27,7 @@ class CovidStatService {
             val body: MultiValueMap<String, String> = LinkedMultiValueMap()
             val entity = HttpEntity(body, httpHeaders)
             val result = restTemplate.exchange(uri, HttpMethod.GET, entity, CovidStat::class.java)
-            return result.body
+            return result.body!!
         }
 }
 

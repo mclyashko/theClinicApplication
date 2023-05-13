@@ -23,6 +23,11 @@ spring:
           ssl:
             enable: true
 
+server:
+  servlet:
+    session:
+      timeout: 270m
+
 api:
   covid:
     key: ${COVID_API_KEY}
