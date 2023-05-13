@@ -1,9 +1,10 @@
 import React from 'react';
+import PatientNavbar from "../../component/PatientNavbar/PatientNavbar";
 
 function PatientHomePage(props) {
     return (
         <div>
-            patient
+            <PatientNavbar/>
         </div>
     );
 }

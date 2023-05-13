@@ -33,7 +33,6 @@ const LoginSubmit = () => {
                     dispatch(updateGenderAction(currentUser.gender))
                     dispatch(updateDateOfBirthAction(currentUser.dateOfBirth))
                     dispatch(updateTelephoneAction(currentUser.phoneNumber))
-                    console.log("done")
                 }}
             >
                 Вход

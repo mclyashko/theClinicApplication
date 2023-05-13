@@ -23,8 +23,8 @@ const Login = () => {
                     </form>
                     <LoginSubmit/>
                     <LoginToRegistration/>
-                    {role === PATIENT_ROLE && <Navigate to={DOCTOR_HOME_ROUTE}/>}
-                    {role === DOCTOR_ROLE && <Navigate to={PATIENT_HOME_ROUTE}/>}
+                    {role === PATIENT_ROLE && <Navigate to={PATIENT_HOME_ROUTE}/>}
+                    {role === DOCTOR_ROLE && <Navigate to={DOCTOR_HOME_ROUTE}/>}
                 </div>
             </Wrapper>
         </div>
