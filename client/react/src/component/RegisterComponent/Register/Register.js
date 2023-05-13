@@ -13,23 +13,25 @@ import RegistrationToLogin from "../RegistrationToLogin/RegistrationToLogin";
 
 const Register = () => {
     return (
-        <Wrapper>
-            <div className="login-form mg">
-                <form action="/registration" method="POST">
-                    <h2 className="text-center pd1">Регистрация</h2>
-                    <RegisterName/>
-                    <RegisterSurname/>
-                    <RegisterPatronymic/>
-                    <RegisterGender/>
-                    <RegisterDateOfBirth/>
-                    <RegisterPhoneNumber/>
-                    <RegisterEmail/>
-                    <RegisterPassword/>
-                </form>
-                <RegisterSubmit/>
-                <RegistrationToLogin/>
-            </div>
-        </Wrapper>
+        <div style = {{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh'}}>
+            <Wrapper>
+                <div className="login-form mg" style = {{ paddingLeft: '15vw', paddingRight: '15vw'}}>
+                    <form action="/registration" method="POST">
+                        <h2 className="text-center pd1">Регистрация</h2>
+                        <RegisterName/>
+                        <RegisterSurname/>
+                        <RegisterPatronymic/>
+                        <RegisterGender/>
+                        <RegisterDateOfBirth/>
+                        <RegisterPhoneNumber/>
+                        <RegisterEmail/>
+                        <RegisterPassword/>
+                    </form>
+                    <RegisterSubmit/>
+                    <RegistrationToLogin/>
+                </div>
+            </Wrapper>
+        </div>
     )
 }
 

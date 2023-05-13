@@ -13,9 +13,9 @@ const Login = () => {
     const role = useSelector(state => state.userInf.role)
 
     return (
-        <div>
+        <div style = {{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', minWidth: '100vh'}}>
             <Wrapper>
-                <div className="login-form mg">
+                <div className="login-form mg" style = {{ paddingLeft: '15vw', paddingRight: '15vw'}}>
                     <form action="/src/component/LoginComponent/Login/Login" method="post">
                         <h2 className="text-center pd1">Вход</h2>
                         <LoginUsername/>

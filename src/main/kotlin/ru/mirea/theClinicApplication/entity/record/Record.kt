@@ -12,7 +12,7 @@ class Record (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", unique = true)
-    @JsonIgnore
+//    @JsonIgnore
     var id: Long? = null,
 
     @Column(nullable = false)
@@ -24,12 +24,10 @@ class Record (
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id", updatable = false)
-    @JsonIgnore
     var client: AppUser? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "procedure_id", updatable = false)
-    @JsonIgnore
     var procedure: Procedure? = null,
 
 ) {

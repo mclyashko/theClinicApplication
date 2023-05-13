@@ -1,6 +1,7 @@
 export const LOGIN_ROUTE = "/login"
 export const DOCTOR_HOME_ROUTE = "/home_doctor"
 export const PATIENT_HOME_ROUTE = "/home_patient"
+export const LOGOUT_ROUTE = "/logout"
 
 
 

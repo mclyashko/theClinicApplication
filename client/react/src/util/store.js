@@ -1,6 +1,7 @@
 import {combineReducers, legacy_createStore as createStore} from "@reduxjs/toolkit";
 import loginPageReducer from "../reducer/LoginPageReducer/LoginPageReducer";
 import userInfoReducer from "../reducer/UserInfoReducer/UserInfoReducer";
+import doctorEmailSearchReducer from "../reducer/DoctorEmailSearchReducer/DoctorEmailSearchReducer";
 
 const saveToLocalStorage = (state) => {
     try {
@@ -22,7 +23,8 @@ const loadFromLocalStorage = () => {
 
 const rootReducer = combineReducers({
     login: loginPageReducer,
-    userInf: userInfoReducer
+    userInf: userInfoReducer,
+    doctorEmailSearch: doctorEmailSearchReducer
 })
 
 const persistedStore = loadFromLocalStorage();
