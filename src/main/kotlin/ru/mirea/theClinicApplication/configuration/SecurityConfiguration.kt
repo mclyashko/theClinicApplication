@@ -66,7 +66,6 @@ class SecurityConfiguration @Autowired constructor(
             .authenticated()
             .and()
             .formLogin()
-//            .loginPage("/login")
             .loginProcessingUrl("/login")
             .failureHandler(customAuthenticationFailureHandler)
             .successHandler(customAuthenticationSuccessHandler)
@@ -82,23 +81,7 @@ class SecurityConfiguration @Autowired constructor(
             .and()
             .userDetailsService(userDetailsService)
             .sessionManagement()
-//            .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-//            .sessionFixation().migrateSession()
-//            .and()
-//            .headers()
-//            .addHeaderWriter(StaticHeadersWriter("Access-Control-Allow-Origin", "http://localhost:3000"))
-//            .addHeaderWriter(StaticHeadersWriter("Access-Control-Allow-Credentials", "true"))
     }
-
-//    @Bean
-//    fun corsConfigurationSource(): CorsConfigurationSource? {
-//        val source = UrlBasedCorsConfigurationSource()
-//        val configuration = CorsConfiguration()
-//        configuration.addAllowedMethod("*")
-//        configuration.addAllowedHeader("*")
-//        source.registerCorsConfiguration("/**", configuration)
-//        return source
-//    }
 
     @Bean
     fun corsConfigurationSource(): CorsConfigurationSource {

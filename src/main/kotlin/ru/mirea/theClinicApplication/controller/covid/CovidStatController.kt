@@ -9,12 +9,6 @@ import ru.mirea.theClinicApplication.entity.appUser.AppUserRole
 import ru.mirea.theClinicApplication.entity.covid.CovidStat
 import ru.mirea.theClinicApplication.service.covid.CovidStatService
 
-//@Controller
-//@RequestMapping("/covid_stat")
-//class CovidStatController(
-//    private val covidStatService: CovidStatService
-//) {}
-
 @RestController
 class NewCovidStatController(
     private val covidStatService: CovidStatService
@@ -23,7 +17,5 @@ class NewCovidStatController(
     @Secured(AppUserRole.patientFinalStr)
     fun getCovidStat(): CovidStat {
         return covidStatService.ruStatistics
-//        model.addAttribute("covidStat", covidStat)
-//        return "covid_stat"
     }
 }
