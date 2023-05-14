@@ -1,4 +1,4 @@
-export const serverUrl = "http://localhost:8080"
+export const serverUrl = "http://158.160.23.168:8080"
 
 async function bodyRequester(relativeUrl, method, body = null, contentType = "application/json") {
     let init = {

@@ -1,0 +1,8 @@
+ARG REACT_APP_SERVER_HOST
+
+FROM node:19 as builder
+WORKDIR /app
+COPY client/react/package.json /app/package.json
+RUN npm install --only=prod
+COPY client/react /app
+ENTRYPOINT [ "npm", "start" ]

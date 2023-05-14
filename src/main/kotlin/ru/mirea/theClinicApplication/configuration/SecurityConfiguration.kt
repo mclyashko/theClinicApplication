@@ -1,6 +1,7 @@
 package ru.mirea.theClinicApplication.configuration
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider
@@ -27,11 +28,14 @@ class SecurityConfiguration @Autowired constructor(
     private val customAuthenticationSuccessHandler: CustomAuthenticationSuccessHandler
 ) : WebSecurityConfigurerAdapter() {
 
+    @Value("\${cors.front-link}")
+    lateinit var corsFrontLink: String
+
     public override fun configure(http: HttpSecurity) {
         http
             .cors().configurationSource {
                 val cors = CorsConfiguration()
-                cors.allowedOrigins = listOf("http://localhost:3000")
+                cors.allowedOrigins = listOf(corsFrontLink)
                 cors.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 cors.allowedHeaders = listOf("*")
                 cors.allowCredentials = true
@@ -43,7 +47,7 @@ class SecurityConfiguration @Autowired constructor(
             .antMatchers(
                 "/login", "/logout", "/registration",
                 "/authentication_failure", "/user_already_exists",
-                "/favicon.ico", "/get_current_user"
+                "/favicon.ico", "/get_current_user", "/actuator/health"
             )
             .permitAll() // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             .antMatchers("/home_doctor").hasRole(AppUserRole.DOCTOR.name)

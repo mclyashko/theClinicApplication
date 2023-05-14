@@ -31,3 +31,6 @@ server:
 api:
   covid:
     key: ${COVID_API_KEY}
+
+cors:
+  front-link: ${CORS_FRONT_HOST}
