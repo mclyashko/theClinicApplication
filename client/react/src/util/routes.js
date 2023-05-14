@@ -1,5 +1,17 @@
 import LoginRegisterPage from "../page/LoginRegisterPage/LoginRegisterPage";
-import {CONTACT_DETAILS_ROUTE, COVID_STAT_ROUTE, DOCTOR_HOME_ROUTE, LIST_OF_SERVICES_ROUTE, LOGIN_ROUTE, LOGOUT_ROUTE, PATIENT_HOME_ROUTE, QUIZ_ROUTE, REVIEW_ROUTE} from "./consts";
+import {
+    CONTACT_DETAILS_ROUTE,
+    CORRECT_TIME_ROUTE,
+    COVID_STAT_ROUTE,
+    DOCTOR_HOME_ROUTE,
+    LIST_OF_SERVICES_ROUTE,
+    LOGIN_ROUTE,
+    LOGOUT_ROUTE,
+    PATIENT_HOME_ROUTE,
+    QUIZ_ROUTE,
+    REVIEW_ROUTE,
+    WRONG_TIME_ROUTE
+} from "./consts";
 import DoctorHomePage from "../page/DoctorHomePage/DoctorHomePage";
 import PatientHomePage from "../page/PatientHomePage/PatientHomePage";
 import LogoutPage from "../page/LogoutPage/LogoutPage";
@@ -8,6 +20,8 @@ import CovidStatPage from "../page/CovidStatPage/CovidStatPage";
 import ListOfServicesPage from "../page/ListOfServicesPage/ListOfServicesPage";
 import QuizPage from "../page/QuizPage/QuizPage";
 import ReviewPage from "../page/ReviewPage/ReviewPage";
+import WrongTimePage from "../page/WrongTimePage/WrongTimePage";
+import CorrectTimePage from "../page/CorrectTimePage/CorrectTimePage";
 
 export const publicRoutes = [
     {
@@ -35,6 +49,14 @@ export const patientRoutes = [
     {
         path: LIST_OF_SERVICES_ROUTE,
         Element: ListOfServicesPage
+    },
+    {
+        path: WRONG_TIME_ROUTE,
+        Element: WrongTimePage
+    },
+    {
+        path: CORRECT_TIME_ROUTE,
+        Element: CorrectTimePage
     },
     {
         path: CONTACT_DETAILS_ROUTE,

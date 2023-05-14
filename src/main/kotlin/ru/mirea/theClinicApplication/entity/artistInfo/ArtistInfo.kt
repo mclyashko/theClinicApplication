@@ -22,6 +22,5 @@ class ArtistInfo (
     var procedure: Procedure? = null,
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "artistInfo")
-    @JsonIgnore
     var artist: AppUser? = null
 )

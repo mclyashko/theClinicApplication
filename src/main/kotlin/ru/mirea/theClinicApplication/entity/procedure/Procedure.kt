@@ -10,7 +10,6 @@ class Procedure (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", unique = true)
-    @JsonIgnore
     var id: Long? = null,
 
     @Column(nullable = false)
@@ -24,7 +23,6 @@ class Procedure (
     var recordList: List<Record>? = null,
 
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "procedure")
-    @JsonIgnore
     var artistInfo: ArtistInfo? = null
 ) {
     override fun toString(): String {

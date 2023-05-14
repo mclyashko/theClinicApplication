@@ -1,6 +1,7 @@
 import {createAction, createReducer} from "@reduxjs/toolkit";
 
 const initialState = {
+    id: '',
     name: '',
     surname: '',
     patronymic: '',
@@ -11,6 +12,8 @@ const initialState = {
     password: '',
     role: ''
 }
+
+export const updateIdAction = createAction('UPDATE_ID')
 
 export const updateLoginAction = createAction('UPDATE_LOGIN')
 
@@ -33,6 +36,9 @@ export const updateRoleAction = createAction('UPDATE_ROLE')
 export const clearAction = createAction('CLEAR_USER')
 
 export default createReducer(initialState, {
+    [updateIdAction]: function(state, action) {
+        state.id = action.payload
+    },
     [updateLoginAction]: function (state, action) {
         state.login = action.payload
     },
@@ -61,6 +67,7 @@ export default createReducer(initialState, {
         state.role = action.payload
     },
     [clearAction]: function (state) {
+        state.id = ''
         state.name = ''
         state.surname = ''
         state.patronymic = ''

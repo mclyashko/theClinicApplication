@@ -15,7 +15,6 @@ class AppUser (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", unique = true)
-    @JsonIgnore
     var id: Long? = null,
 
     @Column(nullable = false)

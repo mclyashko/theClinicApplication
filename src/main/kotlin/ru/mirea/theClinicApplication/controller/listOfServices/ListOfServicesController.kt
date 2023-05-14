@@ -9,7 +9,9 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.RestController
 import ru.mirea.theClinicApplication.annotation.mailProc.SendMailProc
 import ru.mirea.theClinicApplication.entity.appUser.AppUser
 import ru.mirea.theClinicApplication.entity.appUser.AppUserRole
@@ -20,30 +22,24 @@ import ru.mirea.theClinicApplication.service.procedure.ProcedureService
 import ru.mirea.theClinicApplication.service.record.RecordService
 import java.time.LocalDateTime
 
-@Controller
+@RestController
 class ListOfServicesController @Autowired constructor(
     private val appUserService: AppUserService, private val procedureService: ProcedureService,
     private val recordService: RecordService, private val sendMailHelper: SendMailHelper
 ) {
-    @GetMapping("/list_of_services")
+    @PostMapping("/list_of_services")
     @Secured(AppUserRole.patientFinalStr)
-    fun getListOfServicesPage(model: Model): String {
-        val appUser = appUserService.currentUser
-        val procedureList = procedureService.allProceduresSortedByCoast
-        model.addAttribute(
-            "me",
-            appUser
-        )
-        model.addAttribute(
-            "services",
-            procedureList
-        )
-        return "list_of_services"
+    fun getListOfServicesPage(@RequestBody(required = false) procedureDescription: FilterServicesRequestBody?): List<Procedure> {
+        return procedureDescription?.let {
+            procedureService.getAllProceduresSortedByCoastFilteredByProcedureDescription(
+                procedureDescription.procedureDescription
+            )
+        } ?: procedureService.allProceduresSortedByCoast
     }
 
     @PostMapping("/make_an_appointment")
     @Secured(AppUserRole.patientFinalStr)
-    fun makeAnAppointment(@ModelAttribute("newAppointmentInfo") newAppointmentInfo: NewAppointmentInfo): String {
+    fun makeAnAppointment(@RequestBody newAppointmentInfo: NewAppointmentInfo): NewAppointmentResponseBody {
         val appUser = appUserService.findById(newAppointmentInfo.clientId!!)
         val procedure = procedureService.findById(newAppointmentInfo.procedureId!!)
         val dateTime = newAppointmentInfo.dateTime!!
@@ -52,40 +48,12 @@ class ListOfServicesController @Autowired constructor(
         record.client = appUser
         record.procedure = procedure
         record.dateTime = dateTime
-        return recordService.save(record)
-    }
-
-    @PostMapping("fBPD")
-    @Secured(AppUserRole.patientFinalStr)
-    fun filterByProcedureDescription(@RequestParam procedureDescription: String?, model: Model): String {
-        val appUser = appUserService.currentUser
-        val procedureListFilteredByProcedureDescription: List<Procedure> = if (!procedureDescription.isNullOrEmpty()) {
-            procedureService.getAllProceduresSortedByCoastFilteredByProcedureDescription(
-                procedureDescription
-            )
+        return if (recordService.save(record) == "ok_time") {
+            NewAppointmentResponseBody(true)
         } else {
-            procedureService.allProceduresSortedByCoast
+            NewAppointmentResponseBody(false)
         }
-        model.addAttribute(
-            "me",
-            appUser
-        )
-        model.addAttribute(
-            "services",
-            procedureListFilteredByProcedureDescription
-        )
-        return "list_of_services"
     }
-
-    @get:Secured(AppUserRole.patientFinalStr)
-    @get:GetMapping("/ok_time")
-    val okPage: String
-        get() = "ok_time"
-
-    @get:Secured(AppUserRole.patientFinalStr)
-    @get:GetMapping("/wrong_time")
-    val wrongPage: String
-        get() = "wrong_time"
 }
 
 class NewAppointmentInfo {
@@ -102,6 +70,14 @@ class NewAppointmentInfo {
                 '}'
     }
 }
+
+data class FilterServicesRequestBody(
+    val procedureDescription: String
+)
+
+data class NewAppointmentResponseBody(
+    val status: Boolean
+)
 
 @Component
 class SendMailHelper {

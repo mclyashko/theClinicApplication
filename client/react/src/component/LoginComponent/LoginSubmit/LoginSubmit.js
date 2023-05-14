@@ -5,7 +5,7 @@ import signInRequest from "../../../util/request/auth/signInRequest";
 import currentUserRequest from "../../../util/request/auth/currentUserRequest";
 import {
     updateDateOfBirthAction,
-    updateGenderAction, updateLoginAction,
+    updateGenderAction, updateIdAction, updateLoginAction,
     updateNameAction,
     updatePatronymicAction,
     updateRoleAction,
@@ -27,6 +27,7 @@ const LoginSubmit = () => {
                     await currentUser
                     console.log(signInData.role)
                     dispatch(updateRoleAction(signInData.role))
+                    dispatch(updateIdAction(currentUser.id))
                     dispatch(updateNameAction(currentUser.name))
                     dispatch(updateSurnameAction(currentUser.surname))
                     dispatch(updatePatronymicAction(currentUser.patronymic))
