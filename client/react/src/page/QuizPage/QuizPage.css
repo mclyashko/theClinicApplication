@@ -1,0 +1,10 @@
+.option {
+    display: flex;
+    flex-direction: row;
+}
+
+.option p {
+    margin-left: 15px;
+    position: relative;
+    margin-top: -6px;
+}

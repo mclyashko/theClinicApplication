@@ -13,7 +13,6 @@ class Question (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false, unique = true)
-    @JsonIgnore
     var id: Long? = null,
 
     @Column(name = "TITLE")
@@ -40,6 +39,7 @@ class Question (
     @Transient
     var choose: Int? = null
 ) {
+    @get:JsonIgnore
     val questionPoints: Int
         get() = when (choose) {
             1 -> (pointsA)!!
@@ -50,6 +50,7 @@ class Question (
             )
         }
 
+    @get:JsonIgnore
     val maxQuestionPoints: Int
         get() {
             return maxOf(
@@ -57,6 +58,7 @@ class Question (
             )
         }
 
+    @get:JsonIgnore
     val minQuestionPoints: Int
         get() {
             return minOf(
